@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p dist/pages
           cp -R dist/client/jikan-kyuka-calculator/. dist/pages/
-          cp dist/client/index.html dist/client/index.rsc dist/client/favicon.svg dist/pages/
+          cp dist/client/index.html dist/client/index.rsc dist/client/favicon.svg dist/client/icon-192.png dist/client/icon-512.png dist/client/apple-touch-icon.png dist/client/manifest.webmanifest dist/pages/
           touch dist/pages/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

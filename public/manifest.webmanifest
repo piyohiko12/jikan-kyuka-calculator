@@ -1,0 +1,24 @@
+{
+  "name": "やすみナビ｜時間休かんたん計算",
+  "short_name": "やすみナビ",
+  "description": "出勤・早退時刻から、1時間単位の時間休をかんたんに計算します。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#b84f7a",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
