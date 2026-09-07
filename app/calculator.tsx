@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { Clock3, ArrowDownLeft, ArrowUpRight, ArrowRight, Settings2, Coffee, Copy, Info, RotateCcw, Flower2 } from 'lucide-react';
+import { Clock3, ArrowDownLeft, ArrowUpRight, ArrowRight, Settings2, Coffee, Copy, Info, RotateCcw } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { calculate, defaults, duration, time, type Settings, type Mode } from '@/lib/leave';
@@ -38,7 +38,7 @@ export default function Home() {
  const inputFields=<div className="actual-fields">{mode!=='departure'&&<TimeField label="実際の出勤時刻" value={arrival} onChange={setArrival}/>} {mode!=='arrival'&&<TimeField label="実際の早退時刻" value={departure} onChange={setDeparture}/>}</div>;
  const points=!result.error ? Array.from(new Set([result.start,result.end,...(settings.hasBreak?[result.bs,result.be]:[]),...result.entries.flatMap(e=>[e.from,e.to])])).sort((a,b)=>a-b) : [];
  return <div className="app-shell">
-  <header className="topbar"><a href="./" className="brand"><span className="brand-icon"><Flower2 size={24}/></span>やすみナビ<span className="brand-divider"/><span className="brand-caption">時間休かんたん計算</span></a><span className="unit-pill">1時間単位</span></header>
+  <header className="topbar"><a href="./" className="brand"><span className="brand-icon"><Clock3 size={24}/></span>やすみナビ<span className="brand-divider"/><span className="brand-caption">時間休かんたん計算</span></a><span className="unit-pill">1時間単位</span></header>
   <main>
    <div className="page-heading"><div><p className="eyebrow">LEAVE CALCULATOR</p><h1>休暇の入力、迷わずに。</h1><p>出勤・早退の時刻から、申請する時間休を計算します。</p></div><span className="auto-label"><span/>入力すると自動計算</span></div>
    <div className="workspace">
