@@ -174,4 +174,8 @@ footer { color:#607a8f; }
   .page-heading { padding:21px 20px; border-radius:19px; }
   .page-heading::after { width:150px; height:150px; right:-70px; bottom:-110px; }
   .card,.result-card { border-radius:17px; box-shadow:0 12px 30px #1e5f8c12; }
+  .pair,.actual-fields { grid-template-columns:1fr; flex-direction:column; gap:14px; }
+  .actual-fields .time-field { max-width:none; }
+  input[type=time] { max-width:100%; height:56px; padding:10px 12px; font-size:20px; }
+  .scheduled strong { white-space:nowrap; }
 }
