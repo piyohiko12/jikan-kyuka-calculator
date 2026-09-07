@@ -1,7 +1,9 @@
 # じかん休
 勤務時間と1つの休憩区間を設定し、出勤前・早退後の時間休を1時間単位で提案するアプリです。設定はブラウザに保存します。申請システムへの登録は行いません。
 
-アプリ: https://jikan-kyuka-calculator.kabitaso.chatgpt.site/
+GitHub Pages: https://piyohiko12.github.io/jikan-kyuka-calculator/
+
+Sites版: https://jikan-kyuka-calculator.kabitaso.chatgpt.site/
 
 ## 計算方針
 - 同日勤務のみ。休憩を除いた不在時間を、出勤前と早退後それぞれ60分単位で切り上げます。
