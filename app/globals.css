@@ -98,6 +98,56 @@ input[type=time] {
 }
 input[type=time]:hover { border-color:#9fcce0; background:white; }
 input[type=time]:focus { border-color:#35a5d3; box-shadow:0 0 0 4px #35a5d31a; outline:none; }
+.time-input-shell {
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  width:100%;
+  min-width:0;
+  height:53px;
+  padding:10px 12px;
+  overflow:hidden;
+  border:1px solid #c9dfeb;
+  border-radius:12px;
+  background:#f9fdff;
+  box-shadow:inset 0 1px 2px #1c65850a,0 1px 0 white;
+  cursor:pointer;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.time-input-shell:hover { border-color:#9fcce0; background:white; }
+.time-input-shell:focus-within { border-color:#35a5d3; box-shadow:0 0 0 4px #35a5d31a; background:white; }
+.time-input-value {
+  min-width:0;
+  color:#192b43;
+  font-size:21px;
+  font-weight:600;
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.time-input-icon { flex:0 0 auto; color:#193e5c; }
+.time-input-shell input[type=time] {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:inherit;
+  background:transparent;
+  box-shadow:none;
+  opacity:0;
+  cursor:pointer;
+}
+.time-input-shell input[type=time]:hover,
+.time-input-shell input[type=time]:focus { border:0; background:transparent; box-shadow:none; outline:none; }
+.actual-fields .time-input-shell { height:60px; padding:10px 15px; }
+.actual-fields .time-input-value { font-size:clamp(24px,4vw,29px); }
 .break-heading { color:#274d6b; }
 .scheduled { border-color:#dceaf2; }
 .scheduled strong { color:#1767a5; }
@@ -174,8 +224,11 @@ footer { color:#607a8f; }
   .page-heading { padding:21px 20px; border-radius:19px; }
   .page-heading::after { width:150px; height:150px; right:-70px; bottom:-110px; }
   .card,.result-card { border-radius:17px; box-shadow:0 12px 30px #1e5f8c12; }
-  .pair,.actual-fields { grid-template-columns:1fr; flex-direction:column; gap:14px; }
+  .pair { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
   .actual-fields .time-field { max-width:none; }
-  input[type=time] { max-width:100%; height:56px; padding:10px 12px; font-size:20px; }
+  .time-input-shell { height:56px; padding:10px; }
+  .time-input-value { font-size:20px; }
+  .actual-fields .time-input-shell { height:60px; padding:10px 12px; }
+  .actual-fields .time-input-value { font-size:23px; }
   .scheduled strong { white-space:nowrap; }
 }
