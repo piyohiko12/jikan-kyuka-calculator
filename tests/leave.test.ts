@@ -1,0 +1,14 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { calculate, defaults, minutes } from '../lib/leave.ts';
+const calc=(mode:'arrival'|'departure'|'both',a='09:30',d='15:30')=>calculate(defaults,mode,a,d);
+test('15:30早退を15:00から2時間に切り上げる',()=>{const r=calc('departure');assert.equal(r.total,120);assert.equal(r.entries[0].from,900);assert.equal(r.entries[0].extra,30);});
+test('1分の端数と60分ちょうど',()=>{assert.equal(calc('arrival','08:31').total,60);assert.equal(calc('arrival','09:30').total,60);assert.equal(calc('arrival','09:31').total,120);});
+test('休憩をまたぐ出勤・早退',()=>{const a=calc('arrival','12:45');assert.equal(a.missing,210);assert.equal(a.entries[0].to,795);assert.equal(a.entries[0].breakMinutes,45);const d=calc('departure','','11:30');assert.equal(d.total,300);assert.equal(d.entries[0].from,675);assert.equal(d.entries[0].breakMinutes,45);});
+test('休憩中は時間休を加算しない',()=>{assert.equal(calc('arrival','12:00').missing,calc('arrival','12:44').missing);assert.equal(calc('departure','','12:01').missing,calc('departure','','12:45').missing);});
+test('勤務時間外は休暇不要',()=>{assert.equal(calc('both','08:00','18:00').total,0);assert.equal(calc('departure','','17:00').total,0);});
+test('両方は区間ごとに切り上げる',()=>{const r=calc('both','08:31','16:59');assert.equal(r.total,120);assert.equal(r.entries.length,2);});
+test('全日を超える切り上げと重複を拒否',()=>{assert.ok(calc('arrival','17:00').error);assert.ok(calc('both','12:30','12:45').error);});
+test('未入力・逆順・休憩設定を検証',()=>{assert.ok(calc('arrival','').error);assert.ok(calc('both','16:00','15:00').error);assert.ok(calculate({...defaults,end:'08:00'},'departure','','15:00').error);assert.ok(calculate({...defaults,breakStart:'07:00'},'departure','','15:00').error);assert.ok(calculate({...defaults,breakEnd:'12:00'},'departure','','15:00').error);assert.ok(Number.isNaN(minutes('25:00')));});
+test('休憩なし・勤務が60分未満',()=>{const r=calculate({...defaults,hasBreak:false},'arrival','12:30','');assert.equal(r.total,240);assert.equal(r.entries[0].to,750);assert.ok(calculate({...defaults,start:'09:00',end:'09:45',hasBreak:false},'arrival','09:10','').error);});
+test('全時刻で提案区間の勤務分数と1時間単位を検証',()=>{for(let m=0;m<1440;m++){const value=`${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;for(const mode of ['arrival','departure'] as const){const r=calc(mode,value,value);if(r.error)continue;for(const e of r.entries){const rest=Math.max(0,Math.min(e.to,765)-Math.max(e.from,720));assert.equal(e.to-e.from-rest,e.rounded);assert.equal(e.rounded%60,0);assert.ok(e.rounded>=e.missing);assert.ok(e.from>=510&&e.to<=1020);}}}});
