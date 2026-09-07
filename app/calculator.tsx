@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { Clock3, ArrowDownLeft, ArrowUpRight, ArrowRight, Settings2, Coffee, Copy, Info, RotateCcw } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -7,7 +7,8 @@ import { Switch } from '@/components/ui/switch';
 import { calculate, defaults, duration, time, type Settings, type Mode } from '@/lib/leave';
 
 function TimeField({label,value,onChange}:{label:string;value:string;onChange:(v:string)=>void}) {
- return <label className="time-field"><span className="time-field-label">{label}</span><span className="time-input-shell"><span className="time-input-value" aria-hidden="true">{value||'--:--'}</span><Clock3 className="time-input-icon" size={18} aria-hidden="true"/><input aria-label={label} type="time" step="60" value={value} onChange={e=>onChange(e.target.value)} required /></span></label>;
+ const id=useId();
+ return <div className="time-field"><label className="time-field-label" htmlFor={id}>{label}</label><span className="time-input-shell"><span className="time-input-value" aria-hidden="true">{value||'--:--'}</span><Clock3 className="time-input-icon" size={18} aria-hidden="true"/><input id={id} type="time" step="60" value={value} onChange={e=>onChange(e.target.value)} required /></span></div>;
 }
 export default function Home() {
  const [settings,setSettings]=useState<Settings>(defaults),[mode,setMode]=useState<Mode>('departure'),[arrival,setArrival]=useState('09:30'),[departure,setDeparture]=useState('15:30'),[ready,setReady]=useState(false),[copied,setCopied]=useState('');
