@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   description: '勤務・休憩時間を設定して、出勤と早退から1時間単位の時間休をかんたん計算。',
   manifest: './manifest.webmanifest',
   icons: {
-    icon: [{url: './favicon.svg', type: 'image/svg+xml'}],
-    apple: [{url: './apple-touch-icon.png', sizes: '180x180'}],
+    icon: [{url: './favicon-blue.svg', type: 'image/svg+xml'}],
+    apple: [{url: './apple-touch-icon-blue.png', sizes: '180x180'}],
   },
   appleWebApp: {capable: true, title: 'やすみナビ', statusBarStyle: 'default'},
 };
-export const viewport = {width: 'device-width', initialScale: 1, themeColor: '#b84f7a'};
+export const viewport = {width: 'device-width', initialScale: 1, themeColor: '#287fce'};
 export default function RootLayout({children}: {children: React.ReactNode}) { return <html lang="ja"><body>{children}</body></html>; }
